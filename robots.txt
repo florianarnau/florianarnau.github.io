@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /private/     # Exemple : Ne pas indexer les pages privées
+Disallow: /admin/       # Exemple : Ne pas indexer les pages d'administration
+Disallow: /includes/    # Exemple : Ne pas indexer les fichiers inclus
+Disallow: /config/      # Exemple : Ne pas indexer les fichiers de configuration
