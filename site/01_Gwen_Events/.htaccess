@@ -1,0 +1,25 @@
+# Désactiver l'affichage du contenu du répertoire
+Options -Indexes
+
+# Redirection pour la réecriture d'URL
+# RewriteEngine On
+# RewriteRule ^(.*)$ index.php [L]
+
+# Activer la compression Gzip pour améliorer les performances
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css application/json
+    AddOutputFilterByType DEFLATE application/javascript application/x-javascript
+    AddOutputFilterByType DEFLATE application/xml application/xhtml+xml
+</IfModule>
+
+# Protéger le fichier .htaccess
+<Files .htaccess>
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+# Protéger le fichier README.md
+<Files README.md>
+    Order Allow,Deny
+    Deny from all
+</Files>

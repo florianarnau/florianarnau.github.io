@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /contact-form/
+Disallow: /includes/
+Disallow: /sections/
+Disallow: /assets/
+
+Sitemap: https://www.nomdusite.com/sitemap.xml
