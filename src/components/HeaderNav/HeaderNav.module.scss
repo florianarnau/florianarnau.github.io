@@ -1,0 +1,39 @@
+@use 'utilities/colors';
+@use 'utilities/dflex';
+
+.HeaderNav {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 50px;
+    padding: 0 20px;
+    @include dflex.fx-center-between;
+    border-bottom: 1px solid colors.$textColor;
+
+    .HeaderNav_Logo{
+        width: 40px;
+    }
+
+    .HeaderNav_MenuIcon{
+        height: 8px;
+        width: 24px;
+        position: relative;
+
+        div{
+            height: 2px;
+            width: 100%;
+            background-color: colors.$white;
+            position: absolute;
+        }
+
+        .HeaderNav_MenuIcon_Bar1{
+            top: 100%;
+        }
+
+        .HeaderNav_MenuIcon_Bar2{
+            bottom: 100%;
+        }
+    
+    }
+}
