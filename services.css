@@ -67,7 +67,9 @@ article .item{
     transition: box-shadow .2s ease-in-out;
 }
 
-article .item:hover{
+article .item:hover {
+    -webkit-box-shadow: 0 0 30px 5px #aaa;
+    -moz-box-shadow: 0 0 30px 5px #aaa;
     box-shadow: 0 0 30px 5px #aaa;
 }
 
