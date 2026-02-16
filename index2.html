@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Florian Arnau</title>
+	<meta name="description" content="Développeur Web Laravel · Big Data & IA">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500&family=Satoshi:wght@400;500;700;900&display=swap" rel="stylesheet">
+	<style>
+		*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+		:root {
+			--black: #0a0a0a;
+			--white: #f8f7f4;
+			--grey: #999;
+			--grey-light: #e0ddd8;
+			--grey-bg: #f1efe9;
+			--rouge: #c4391c;
+			--font-serif: 'Instrument Serif', Georgia, serif;
+			--font-sans: 'Satoshi', system-ui, sans-serif;
+			--font-mono: 'Geist Mono', 'JetBrains Mono', monospace;
+		}
+
+		html { scroll-behavior: smooth; font-size: 16px; }
+
+		body {
+			font-family: var(--font-sans);
+			background: var(--white);
+			color: var(--black);
+			line-height: 1.6;
+			overflow-x: hidden;
+			-webkit-font-smoothing: antialiased;
+		}
+
+		::selection { background: var(--black); color: var(--white); }
+		a { color: inherit; text-decoration: none; }
+
+		/* ═══ NAV ═══ */
+		nav {
+			position: fixed;
+			top: 0; left: 0; right: 0;
+			z-index: 100;
+			padding: 1.25rem 2.5rem;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			mix-blend-mode: difference;
+		}
+		nav, nav a { color: var(--white); }
+
+		.nav-name {
+			font-family: var(--font-serif);
+			font-size: 1.15rem;
+			font-style: italic;
+			letter-spacing: 0.02em;
+		}
+
+		.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+		.nav-links a {
+			font-family: var(--font-mono);
+			font-size: 0.7rem;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			opacity: 0.7;
+			transition: opacity 0.3s;
+		}
+		.nav-links a:hover { opacity: 1; }
+		.nav-burger { display: none; background: none; border: none; color: inherit; cursor: pointer; }
+
+		/* ═══ HERO ═══ */
+		.hero {
+			min-height: 100vh;
+			min-height: 100svh;
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-end;
+			padding: 2.5rem;
+			padding-bottom: 4rem;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.hero-numero {
+			position: absolute;
+			top: 6rem; right: 2.5rem;
+			font-family: var(--font-mono);
+			font-size: 0.65rem;
+			color: var(--grey);
+			writing-mode: vertical-rl;
+			letter-spacing: 0.15em;
+			text-transform: uppercase;
+		}
+
+		.hero h1 {
+			font-family: var(--font-serif);
+			font-weight: 400;
+			font-size: clamp(3.5rem, 10vw, 9rem);
+			line-height: 0.92;
+			letter-spacing: -0.03em;
+			margin-bottom: 2rem;
+		}
+		.hero h1 em {
+			font-style: italic;
+			display: inline-block;
+			transform: rotate(-2deg);
+			transform-origin: left bottom;
+		}
+		.hero h1 .line-2 {
+			display: block;
+			padding-left: clamp(2rem, 8vw, 10rem);
+			color: var(--rouge);
+		}
+
+		.hero-bottom {
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-end;
+			gap: 2rem;
+		}
+		.hero-intro {
+			max-width: 420px;
+			font-size: 0.95rem;
+			color: var(--grey);
+			line-height: 1.7;
+		}
+		.hero-scroll {
+			font-family: var(--font-mono);
+			font-size: 0.65rem;
+			text-transform: uppercase;
+			letter-spacing: 0.15em;
+			color: var(--grey);
+			display: flex;
+			align-items: center;
+			gap: 0.75rem;
+			flex-shrink: 0;
+		}
+		.hero-scroll span { display: block; width: 40px; height: 1px; background: var(--grey); }
+
+		.hero::after {
+			content: '';
+			position: absolute;
+			bottom: 0; left: 2.5rem; right: 2.5rem;
+			height: 1px;
+			background: var(--grey-light);
+		}
+
+		/* ═══ MARQUEE ═══ */
+		.marquee-wrap {
+			overflow: hidden;
+			padding: 1.25rem 0;
+			border-bottom: 1px solid var(--grey-light);
+		}
+		.marquee {
+			display: flex;
+			animation: marquee 30s linear infinite;
+			width: max-content;
+		}
+		.marquee-item {
+			font-family: var(--font-mono);
+			font-size: 0.7rem;
+			text-transform: uppercase;
+			letter-spacing: 0.1em;
+			color: var(--grey);
+			white-space: nowrap;
+			padding: 0 2rem;
+		}
+		.marquee-item::before {
+			content: '◆';
+			margin-right: 2rem;
+			color: var(--rouge);
+			font-size: 0.5rem;
+			vertical-align: middle;
+		}
+		@keyframes marquee {
+			from { transform: translateX(0); }
+			to { transform: translateX(-50%); }
+		}
+
+		/* ═══ SECTIONS ═══ */
+		section {
+			padding: 6rem 2.5rem;
+			position: relative;
+		}
+		section::after {
+			content: '';
+			position: absolute;
+			bottom: 0; left: 2.5rem; right: 2.5rem;
+			height: 1px;
+			background: var(--grey-light);
+		}
+
+		.section-head {
+			display: grid;
+			grid-template-columns: auto 1fr;
+			gap: 1rem 3rem;
+			align-items: baseline;
+			margin-bottom: 4rem;
+		}
+		.section-index {
+			font-family: var(--font-mono);
+			font-size: 0.65rem;
+			color: var(--grey);
+			letter-spacing: 0.1em;
+		}
+		.section-title {
+			font-family: var(--font-serif);
+			font-size: clamp(2rem, 5vw, 3.5rem);
+			font-weight: 400;
+			letter-spacing: -0.02em;
+			line-height: 1;
+		}
+		.section-title em { font-style: italic; color: var(--rouge); }
+
+		/* ═══ ABOUT ═══ */
+		.about-content {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 4rem;
+		}
+		.about-text { font-size: 1.15rem; line-height: 1.8; max-width: 520px; }
+		.about-text strong { font-weight: 700; }
+
+		.about-aside { display: flex; flex-direction: column; gap: 2.5rem; padding-top: 0.5rem; }
+		.aside-block label {
+			display: block;
+			font-family: var(--font-mono);
+			font-size: 0.65rem;
+			text-transform: uppercase;
+			letter-spacing: 0.12em;
+			color: var(--grey);
+			margin-bottom: 0.5rem;
+		}
+		.aside-block p, .aside-block a { font-size: 0.95rem; line-height: 1.7; }
+		.aside-block a { border-bottom: 1px solid var(--grey-light); transition: border-color 0.3s; }
+		.aside-block a:hover { border-color: var(--rouge); }
+
+		/* ═══ SKILLS ═══ */
+		.skills-columns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; }
+		.skill-col h3 {
+			font-family: var(--font-serif);
+			font-size: 1.35rem;
+			font-weight: 400;
+			font-style: italic;
+			margin-bottom: 1.5rem;
+			padding-bottom: 0.75rem;
+			border-bottom: 1px solid var(--grey-light);
+		}
+		.skill-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+		.skill-list li {
+			font-size: 0.9rem;
+			display: flex;
+			align-items: center;
+			gap: 0.6rem;
+		}
+		.skill-list li::before {
+			content: '';
+			width: 4px; height: 4px;
+			border-radius: 50%;
+			background: var(--rouge);
+			flex-shrink: 0;
+		}
+		/* .skill-list li.m { color: var(--grey); }
+		.skill-list li.m::before { background: var(--grey-light); } */
+
+		/* ═══ EXPERIENCE ═══ */
+		.exp-item {
+			display: grid;
+			grid-template-columns: 200px 1fr;
+			gap: 3rem;
+			padding: 3rem 0;
+			border-top: 1px solid var(--grey-light);
+		}
+		.exp-meta { position: sticky; top: 5rem; align-self: start; }
+		.exp-date {
+			font-family: var(--font-mono);
+			font-size: 0.7rem;
+			text-transform: uppercase;
+			letter-spacing: 0.1em;
+			color: var(--rouge);
+			margin-bottom: 0.5rem;
+		}
+		.exp-company { font-size: 0.9rem; color: var(--grey); }
+		.exp-body h3 {
+			font-family: var(--font-serif);
+			font-size: 1.5rem;
+			font-weight: 400;
+			margin-bottom: 0.5rem;
+			line-height: 1.25;
+		}
+		.exp-context { font-size: 0.88rem; color: var(--grey); font-style: italic; margin-bottom: 1.25rem; }
+		.exp-details { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+		.exp-details li {
+			font-size: 0.9rem;
+			line-height: 1.65;
+			padding-left: 1.5rem;
+			position: relative;
+		}
+		.exp-details li::before { content: '—'; position: absolute; left: 0; color: var(--grey); }
+		.exp-result { font-weight: 700; color: var(--rouge); }
+
+		/* ═══ PROJECTS ═══ */
+		.projects-grid {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 1px;
+			background: var(--grey-light);
+			border: 1px solid var(--grey-light);
+		}
+		.project-cell {
+			background: var(--white);
+			padding: 2.5rem 2rem;
+			display: flex;
+			flex-direction: column;
+			min-height: 280px;
+			transition: background 0.3s;
+		}
+		.project-cell:hover { background: var(--grey-bg); }
+		.project-tag {
+			font-family: var(--font-mono);
+			font-size: 0.6rem;
+			text-transform: uppercase;
+			letter-spacing: 0.12em;
+			color: var(--rouge);
+			margin-bottom: auto;
+			padding-bottom: 1.5rem;
+		}
+		.project-cell h3 {
+			font-family: var(--font-serif);
+			font-size: 1.3rem;
+			font-weight: 400;
+			line-height: 1.3;
+			margin-bottom: 0.75rem;
+		}
+		.project-cell p { font-size: 0.85rem; color: var(--grey); line-height: 1.6; }
+
+		/* ═══ EDUCATION ═══ */
+		.edu-item {
+			display: grid;
+			grid-template-columns: 120px 1fr auto;
+			gap: 2rem;
+			padding: 1.75rem 0;
+			border-top: 1px solid var(--grey-light);
+			align-items: baseline;
+		}
+		.edu-year { font-family: var(--font-mono); font-size: 0.7rem; color: var(--rouge); letter-spacing: 0.05em; }
+		.edu-title { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 400; }
+		.edu-school { font-size: 0.85rem; color: var(--grey); text-align: right; }
+
+		/* ═══ CONTACT ═══ */
+		.contact { padding: 8rem 2.5rem 4rem; text-align: center; }
+		.contact::after { display: none; }
+		.contact-big {
+			font-family: var(--font-serif);
+			font-size: clamp(2.5rem, 7vw, 6rem);
+			font-weight: 400;
+			line-height: 1;
+			letter-spacing: -0.03em;
+			margin-bottom: 3rem;
+		}
+		.contact-big a {
+			font-style: italic;
+			color: var(--rouge);
+			border-bottom: 2px solid transparent;
+			transition: border-color 0.3s;
+		}
+		.contact-big a:hover { border-color: var(--rouge); }
+
+		.contact-row { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; }
+		.contact-row a {
+			font-family: var(--font-mono);
+			font-size: 0.75rem;
+			text-transform: uppercase;
+			letter-spacing: 0.1em;
+			color: var(--grey);
+			border-bottom: 1px solid transparent;
+			padding-bottom: 2px;
+			transition: all 0.3s;
+		}
+		.contact-row a:hover { color: var(--black); border-color: var(--black); }
+
+		footer {
+			padding: 2rem 2.5rem;
+			display: flex;
+			justify-content: space-between;
+			font-family: var(--font-mono);
+			font-size: 0.6rem;
+			color: var(--grey);
+			text-transform: uppercase;
+			letter-spacing: 0.1em;
+			border-top: 1px solid var(--grey-light);
+		}
+
+		/* ═══ REVEAL ═══ */
+		.r {
+			opacity: 0;
+			transform: translateY(20px);
+			transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+		}
+		.r.v { opacity: 1; transform: translateY(0); }
+		.r-d1 { transition-delay: 0.1s; }
+		.r-d2 { transition-delay: 0.2s; }
+
+		/* ═══ MOBILE PANEL ═══ */
+		.mobile-panel {
+			position: fixed; inset: 0; z-index: 200;
+			background: var(--black); color: var(--white);
+			display: flex; flex-direction: column;
+			align-items: flex-start; justify-content: center;
+			padding: 3rem; gap: 1.5rem;
+			opacity: 0; pointer-events: none;
+			transition: opacity 0.4s;
+		}
+		.mobile-panel.open { opacity: 1; pointer-events: all; }
+		.mobile-panel a { font-family: var(--font-serif); font-size: 2.5rem; font-style: italic; color: var(--white); line-height: 1.3; }
+		.mobile-close {
+			position: absolute; top: 1.5rem; right: 2rem;
+			background: none; border: none; color: var(--white);
+			font-size: 1rem; cursor: pointer; font-family: var(--font-mono);
+			text-transform: uppercase; letter-spacing: 0.1em;
+		}
+
+		/* ═══ RESPONSIVE ═══ */
+		@media (max-width: 900px) {
+			.nav-links { display: none; }
+			.nav-burger { display: block; }
+			.about-content { grid-template-columns: 1fr; gap: 3rem; }
+			.skills-columns { grid-template-columns: 1fr 1fr; }
+			.exp-item { grid-template-columns: 1fr; gap: 0.75rem; }
+			.exp-meta { position: static; display: flex; gap: 1rem; align-items: baseline; }
+			.projects-grid { grid-template-columns: 1fr; }
+			.edu-item { grid-template-columns: 1fr; gap: 0.25rem; }
+			.edu-school { text-align: left; }
+		}
+		@media (max-width: 600px) {
+			section { padding: 4rem 1.5rem; }
+			section::after { left: 1.5rem; right: 1.5rem; }
+			.hero { padding: 2rem 1.5rem 3rem; }
+			.hero::after { left: 1.5rem; right: 1.5rem; }
+			nav { padding: 1.25rem 1.5rem; }
+			.hero-bottom { flex-direction: column; gap: 1.5rem; }
+			.hero-scroll, .hero-numero { display: none; }
+			.skills-columns { grid-template-columns: 1fr; }
+			.contact { padding: 5rem 1.5rem 3rem; }
+			footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; }
+		}
+	</style>
+</head>
+<body>
+
+	<nav>
+		<a href="#" class="nav-name">Florian Arnau</a>
+		<ul class="nav-links">
+			<li><a href="#about">À propos</a></li>
+			<li><a href="#skills">Compétences</a></li>
+			<li><a href="#work">Expériences</a></li>
+			<li><a href="#projects">Projets</a></li>
+			<li><a href="#contact">Contact</a></li>
+		</ul>
+		<button class="nav-burger" id="burger" aria-label="Menu">
+			<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+		</button>
+	</nav>
+
+	<div class="mobile-panel" id="mp">
+		<button class="mobile-close" id="mc">fermer ×</button>
+		<a href="#about" class="ml">À propos</a>
+		<a href="#skills" class="ml">Compétences</a>
+		<a href="#work" class="ml">Expériences</a>
+		<a href="#projects" class="ml">Projets</a>
+		<a href="#education" class="ml">Formation</a>
+		<a href="#contact" class="ml">Contact</a>
+	</div>
+
+	<section class="hero">
+		<div class="hero-numero">Portfolio — 2026</div>
+		<h1 class="r">Florian<span class="line-2"><em>Arnau</em></span></h1>
+		<div class="hero-bottom r">
+			<p class="hero-intro">Développeur web spécialisé Laravel, avec une double compétence Big Data & IA. Je conçois des applications avec une architecture solide et une obsession pour le détail.</p>
+			<div class="hero-scroll"><span></span>Scroll</div>
+		</div>
+	</section>
+
+	<div class="marquee-wrap" aria-hidden="true">
+		<div class="marquee">
+			<span class="marquee-item">Laravel</span><span class="marquee-item">PHP 8+</span><span class="marquee-item">Python</span><span class="marquee-item">Symfony</span><span class="marquee-item">API Rest</span><span class="marquee-item">MySQL</span><span class="marquee-item">Pandas</span><span class="marquee-item">Scikit-learn</span><span class="marquee-item">Docker</span><span class="marquee-item">Tailwind</span><span class="marquee-item">Streamlit</span><span class="marquee-item">Prestashop</span>
+			<span class="marquee-item">Laravel</span><span class="marquee-item">PHP 8+</span><span class="marquee-item">Python</span><span class="marquee-item">Symfony</span><span class="marquee-item">API Rest</span><span class="marquee-item">MySQL</span><span class="marquee-item">Pandas</span><span class="marquee-item">Scikit-learn</span><span class="marquee-item">Docker</span><span class="marquee-item">Tailwind</span><span class="marquee-item">Streamlit</span><span class="marquee-item">Prestashop</span>
+		</div>
+	</div>
+
+	<section id="about">
+		<div class="section-head r">
+			<span class="section-index">01</span>
+			<h2 class="section-title">À <em>propos</em></h2>
+		</div>
+		<div class="about-content">
+			<div class="about-text r">
+				J'aime concevoir des applications web performantes — PWA, plateformes métier, PIM — avec une architecture solide et une attention particulière portée à l'expérience utilisateur.
+				<br><br>
+				Curieux, rigoureux, je cherche à créer de la <strong>valeur</strong> en combinant développement backend, optimisation des données et automatisation intelligente.
+			</div>
+			<div class="about-aside r r-d1">
+				<div class="aside-block"><label>Localisation</label><p>France</p></div>
+				<div class="aside-block"><label>Langues</label><p>Français (natif), Anglais (B2/C1)</p></div>
+				<div class="aside-block"><label>Intérêts</label><p>Open source, veille tech, composition musicale, art</p></div>
+				<div class="aside-block"><label>Contact</label><p><a href="mailto:arnauflorian@outlook.com">arnauflorian@outlook.com</a></p></div>
+			</div>
+		</div>
+	</section>
+
+	<section id="skills">
+		<div class="section-head r">
+			<span class="section-index">02</span>
+			<h2 class="section-title"><em>Compétences</em></h2>
+		</div>
+		<div class="skills-columns r">
+			<div class="skill-col">
+				<h3>Développement</h3>
+				<ul class="skill-list">
+					<li>Laravel</li><li>PHP 8+</li><li>API REST</li><li>MySQL</li><li>Livewire</li><li>Symfony</li><li>Prestashop</li><li>Tailwind CSS</li><li class="m">PIM / ERP</li><li class="m">Docker</li><li class="m">Git / CI-CD</li>
+				</ul>
+			</div>
+			<div class="skill-col">
+				<h3>Data & IA</h3>
+				<ul class="skill-list">
+					<li>Python</li><li>Pandas</li><li>Scikit-learn</li><li>SQL avancé</li><li class="m">Streamlit</li><li class="m">Power BI</li><li class="m">Hadoop</li>
+				</ul>
+			</div>
+			<div class="skill-col">
+				<h3>Outils</h3>
+				<ul class="skill-list">
+					<li>VS Code</li><li>Postman</li><li>Figma</li><li class="m">Jira / Notion</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<section id="work">
+		<div class="section-head r">
+			<span class="section-index">03</span>
+			<h2 class="section-title"><em>Expériences</em></h2>
+		</div>
+
+		<article class="exp-item r">
+			<div class="exp-meta">
+				<div class="exp-date">Août 2024 — Présent</div>
+				<div class="exp-company">GT2i · Montpellier</div>
+			</div>
+			<div class="exp-body">
+				<h3>Développeur Symfony / Prestashop</h3>
+				<p class="exp-context">Acteur majeur de l'équipement automobile. Accompagnement des équipes métiers dans la création de fonctionnalités à forte valeur ajoutée.</p>
+				<ul class="exp-details">
+					<li>Module Prestashop empreinte carbone — du PIM à la mise en ligne, compensation dynamique côté client. <span class="exp-result">Automatisation complète sur plusieurs milliers de références.</span></li>
+					<li>Bundle Symfony automatisation création produit : déclencheur SQL, synchro plateforme externe, SEO assisté via OpenAI. <span class="exp-result">Réduction du temps de mise en ligne de 60 à 70 %.</span></li>
+					<li>Outil d'association d'images au PIM : import massif, redimensionnement auto (GD), détection couleurs dominantes. <span class="exp-result">Centaines d'images par lot, interventions manuelles quasi supprimées.</span></li>
+					<li>Outils internes et scripts métiers pour les services produits, commerce et support.</li>
+				</ul>
+			</div>
+		</article>
+
+		<article class="exp-item r">
+			<div class="exp-meta">
+				<div class="exp-date">Déc. 2022 — Déc. 2023</div>
+				<div class="exp-company">Promété · Narbonne</div>
+			</div>
+			<div class="exp-body">
+				<h3>Développeur PHP / Drupal</h3>
+				<p class="exp-context">Référence française en développement d'OAD pour le monde agricole.</p>
+				<ul class="exp-details">
+					<li>OAD sur-mesure : suivi d'irrigation et détection des risques de sur-arrosage à partir des données iMetos.</li>
+					<li>Déclencheurs SQL et alertes pour identifier les stations silencieuses depuis plus de 45 min.</li>
+					<li>Refonte interface création de parcelles : carte interactive (tracé, coordonnées, altitude).</li>
+					<li>Site vitrine en production : WordPress + Tailwind, responsive, UX optimisée.</li>
+				</ul>
+			</div>
+		</article>
+	</section>
+
+	<section id="projects">
+		<div class="section-head r">
+			<span class="section-index">04</span>
+			<h2 class="section-title"><em>Projets</em></h2>
+		</div>
+		<div class="projects-grid r">
+			<div class="project-cell">
+				<div class="project-tag">Personnel · En cours</div>
+				<h3>PIM & Outils internes</h3>
+				<p>Plateforme Kanban orientée workflow : gestion de tâches, messagerie inter-équipes, module tickets SAV. Centraliser les échanges et structurer les processus.</p>
+			</div>
+			<div class="project-cell">
+				<div class="project-tag">Personnel · 2026</div>
+				<h3>Dashboard Laravel</h3>
+				<p>Tableau de bord, KPIs, filtres avancés et export. Focus performance backend et clarté de restitution.</p>
+			</div>
+			<div class="project-cell">
+				<div class="project-tag">Master · 2025</div>
+				<h3>Mindra — Streamlit</h3>
+				<p>Application interactive pour construire un pipeline ML complet sans code : de la donnée brute au modèle déployable.</p>
+			</div>
+		</div>
+	</section>
+
+	<section id="education">
+		<div class="section-head r">
+			<span class="section-index">05</span>
+			<h2 class="section-title"><em>Formation</em></h2>
+		</div>
+		<div class="r">
+			<div class="edu-item">
+				<span class="edu-year">2024 — Prés.</span>
+				<span class="edu-title">Master Big Data & Intelligence Artificielle</span>
+				<span class="edu-school">Diginamic</span>
+			</div>
+			<div class="edu-item">
+				<span class="edu-year">2022 — 2024</span>
+				<span class="edu-title">Licence Lead Developer PHP</span>
+				<span class="edu-school">Diginamic</span>
+			</div>
+			<div class="edu-item">
+				<span class="edu-year">2018 — 2020</span>
+				<span class="edu-title">BTS SIO — Option SLAM</span>
+				<span class="edu-school">Lycée Marc Bloch, Sérignan</span>
+			</div>
+		</div>
+	</section>
+
+	<section class="contact" id="contact">
+		<p class="contact-big r">Discutons<br><a href="mailto:arnauflorian@outlook.com"><em>arnauflorian@outlook.com</em></a></p>
+		<div class="contact-row r r-d1">
+			<a href="tel:+33681810843">+33 6 81 81 08 43</a>
+			<a href="https://linkedin.com/in/florianarnau" target="_blank" rel="noopener">LinkedIn</a>
+			<a href="https://github.com/florianarnau" target="_blank" rel="noopener">GitHub</a>
+			<a href="https://florianarnau.dev" target="_blank" rel="noopener">Portfolio</a>
+		</div>
+	</section>
+
+	<footer>
+		<span>© 2026 Florian Arnau</span>
+	</footer>
+
+	<script>
+		const obs = new IntersectionObserver(es => {
+			es.forEach(e => { if (e.isIntersecting) e.target.classList.add('v'); });
+		}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+		document.querySelectorAll('.r').forEach(el => obs.observe(el));
+		setTimeout(() => document.querySelectorAll('.hero .r').forEach(el => el.classList.add('v')), 100);
+
+		const p = document.getElementById('mp');
+		document.getElementById('burger').onclick = () => p.classList.add('open');
+		document.getElementById('mc').onclick = () => p.classList.remove('open');
+		document.querySelectorAll('.ml').forEach(a => a.onclick = () => p.classList.remove('open'));
+
+		document.querySelectorAll('a[href^="#"]').forEach(a => {
+			a.addEventListener('click', function(e) {
+				const t = document.querySelector(this.getAttribute('href'));
+				if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+			});
+		});
+	</script>
+</body>
+</html>
